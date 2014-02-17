@@ -28,10 +28,14 @@
 					_preTop != _top ||
 					_preWidth != _width ||
 					_preHeight != _height
-				) {console.log("update");
+				) {
+					var _parent = targetjs.getParent(src);
+					var _parentLeft = targetjs.getLeft(_parent);
+					var _parentTop = targetjs.getTop(_parent);
+
 					src.style.position = "absolute";
-					src.style.left = _left + "px";
-					src.style.top = _top + "px";
+					src.style.left = (_left - _parentLeft) + "px";
+					src.style.top = (_top - _parentTop) + "px";
 					src.style.width = _width + "px";
 					src.style.height = _height + "px";
 
@@ -55,5 +59,17 @@
 			if(e.offsetParent != null) offset += targetjs.getLeft(e.offsetParent);
 			return offset;
 		},
+		getStyle: function(obj, attr){
+			if(obj.currentStyle)
+				return obj.currentStyle[attr];
+			else
+				return getComputedStyle(obj,false)[attr];
+		},
+		getParent: function(e) {
+			if(e == null) return null;
+			if(targetjs.getStyle(e.offsetParent) != "static")
+				return e.offsetParent;
+			return targetjs.getParent(e.offsetParent);
+		}
 	};
 })();

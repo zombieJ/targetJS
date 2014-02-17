@@ -7,26 +7,47 @@
 		<script src="../src/targetjs.js"></script>
 	</head>
 	<body>
+		<button id="btn_refresh">Refresh</button>
 		<div class="dep1">
-			<div id="tgt1">
-			</div>
-			<button id="btn_refresh">Refresh</button>
-			<div id="src1">
+			<div class="dep2">
+				<div class="dep3">
+					<div id="tgt1"></div>
+					<div id="src1"></div>
+				</div>
 			</div>
 		</div>
 	</body>
 
 	<style>
 		body {
-			padding: 10px 20px;
+			padding: 7px 22px;
 		}
 		.dep1 {
 			margin: 15px 5px;
 			padding: 3px 6px;
 			background: #F4F4F4;
 			width: 70%;
+			height: 500px;
 			overflow: hidden;
-			position: relative;
+			//position: relative;
+		}
+		.dep2 {
+			left: 13px;
+			top: 27px;
+			padding: 5px 3px;
+			background: #AAF;
+			width: 100%;
+			overflow: hidden;
+			//position: absolute;
+		}
+		.dep3 {
+			left: 32px;
+			top: 19px;
+			padding: 23px 14px;
+			background: #FAA;
+			width: 100%;
+			overflow: hidden;
+			//position: fixed;
 		}
 		#tgt1 {
 			width: 400px;
@@ -42,9 +63,10 @@
 		}
 
 		#btn_refresh {
-			position: absolute;
-			right: 0;
-			top: 0;
+			position: fixed;
+			right: 50px;
+			top: 50px;
+			z-index: 100;
 		}
 		</style>
 
@@ -57,12 +79,13 @@
 			var tgt = document.getElementById("tgt1");
 			tgt.style.width = (100 + Math.random() * 300) + "px";
 			tgt.style.height = (100 + Math.random() * 300) + "px";
+			tgt.style.marginTop = Math.random() * 100 + "px";
 		}
 
 		var l = 0;
 		var tgt = document.getElementById("tgt1");
 		var _bodyWidth = document.body.clientWidth * 0.95;
-		setInterval(function() {
+		setInterval(function() {return;
 			l+= 1;
 			if(l + tgt.clientWidth > _bodyWidth) l = 0;
 			tgt.style.marginLeft = l + "px";
