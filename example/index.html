@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>FlexJS Sample</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- flexjs -->
+		<script src="../src/targetjs.js"></script>
+	</head>
+	<body>
+		<div class="dep1">
+			<div id="tgt1">
+			</div>
+			<button id="btn_refresh">Refresh</button>
+			<div id="src1">
+			</div>
+		</div>
+	</body>
+
+	<style>
+		body {
+			padding: 10px 20px;
+		}
+		.dep1 {
+			margin: 15px 5px;
+			padding: 3px 6px;
+			background: #F4F4F4;
+			width: 70%;
+			overflow: hidden;
+			position: relative;
+		}
+		#tgt1 {
+			width: 400px;
+			height: 300px;
+			background: #AFA;
+			margin-top: 100px;
+		}
+
+		#src1 {
+			min-width: 10px;
+			min-height: 10px;
+			background: red;
+		}
+
+		#btn_refresh {
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+		</style>
+
+	<script>
+		var my = targetjs.bindTo(document.getElementById("src1"), document.getElementById("tgt1"), {
+			autoRefresh: true,
+		});
+
+		document.getElementById("btn_refresh").onclick = function() {
+			var tgt = document.getElementById("tgt1");
+			tgt.style.width = (100 + Math.random() * 300) + "px";
+			tgt.style.height = (100 + Math.random() * 300) + "px";
+		}
+
+		var l = 0;
+		var tgt = document.getElementById("tgt1");
+		var _bodyWidth = document.body.clientWidth * 0.95;
+		setInterval(function() {
+			l+= 1;
+			if(l + tgt.clientWidth > _bodyWidth) l = 0;
+			tgt.style.marginLeft = l + "px";
+		}, 10);
+	</script>
+</html>
