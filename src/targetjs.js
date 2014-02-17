@@ -66,10 +66,12 @@
 				return getComputedStyle(obj,false)[attr];
 		},
 		getParent: function(e) {
-			if(e == null) return null;
-			if(targetjs.getStyle(e.offsetParent) != "static")
-				return e.offsetParent;
-			return targetjs.getParent(e.offsetParent);
+			if(e == null || e == document.body) return document.body;
+
+			var _parent = e.offsetParent;
+			if(targetjs.getStyle(_parent, "position") != "static")
+				return _parent;
+			return targetjs.getParent(_parent);
 		}
 	};
 })();
